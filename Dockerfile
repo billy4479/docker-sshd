@@ -1,20 +1,18 @@
-ARG         ALPINE_VERSION="${ALPINE_VERSION:-3.12}"
-FROM        alpine:"${ALPINE_VERSION}"
+FROM        alpine
 
 LABEL       maintainer="https://github.com/hermsi1337"
 
-ARG         OPENSSH_VERSION="${OPENSSH_VERSION:-8.3_p1-r0}"
 ENV         CONF_VOLUME="/conf.d"
 ENV         OPENSSH_VERSION="${OPENSSH_VERSION}" \
             CACHED_SSH_DIRECTORY="${CONF_VOLUME}/ssh" \
             AUTHORIZED_KEYS_VOLUME="${CONF_VOLUME}/authorized_keys" \
             ROOT_KEYPAIR_LOGIN_ENABLED="false" \
             ROOT_LOGIN_UNLOCKED="false" \
-            USER_LOGIN_SHELL="/bin/bash" \
+            USER_LOGIN_SHELL="/bin/ash" \
             USER_LOGIN_SHELL_FALLBACK="/bin/ash"
 
 RUN         apk add --upgrade --no-cache \
-                    openssh=${OPENSSH_VERSION} \
+                    openssh \
             && \
             mkdir -p /root/.ssh "${CONF_VOLUME}" "${AUTHORIZED_KEYS_VOLUME}" \
             && \
