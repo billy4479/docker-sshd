@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -e
 
@@ -167,6 +167,8 @@ else
     log "    no additional SSH-users set"
 
 fi
+
+sed -i "s/AllowTcpForwarding.*/AllowTcpForwarding yes/" /etc/ssh/sshd_config
 
 echo ""
 

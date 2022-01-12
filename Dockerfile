@@ -14,9 +14,6 @@ ENV         OPENSSH_VERSION="${OPENSSH_VERSION}" \
             USER_LOGIN_SHELL_FALLBACK="/bin/ash"
 
 RUN         apk add --upgrade --no-cache \
-                    bash \
-                    bash-completion \
-                    rsync \
                     openssh=${OPENSSH_VERSION} \
             && \
             mkdir -p /root/.ssh "${CONF_VOLUME}" "${AUTHORIZED_KEYS_VOLUME}" \
@@ -26,7 +23,6 @@ RUN         apk add --upgrade --no-cache \
             rm -rf /var/cache/apk/*
 
 COPY        entrypoint.sh /
-COPY        conf.d/etc/ /etc/
 EXPOSE      22
 VOLUME      ["/etc/ssh"]
 ENTRYPOINT  ["/entrypoint.sh"]
