@@ -169,6 +169,7 @@ else
 fi
 
 sed -i "s/AllowTcpForwarding.*/AllowTcpForwarding yes/" /etc/ssh/sshd_config
+sed -i "s/#AddressFamily.*/AddressFamily inet/" /etc/ssh/sshd_config
 
 echo ""
 
